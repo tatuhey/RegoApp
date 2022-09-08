@@ -2,7 +2,7 @@ namespace Assessment02
 {
     public partial class Form1 : Form
     {
-        private const string V = "Duplicate rego.";
+        private const string V = "Duplicate rego."; // ????????????????????????????????????????????????? what is this
         List<string> regoList = new List<string>();
 
         public Form1()
@@ -64,7 +64,7 @@ namespace Assessment02
 
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
-                openFileDialog.InitialDirectory = "..\\Assessment02";
+                openFileDialog.InitialDirectory = "..\\Assessment02\\bin\\Debug\\net6.0-windows";
                 openFileDialog.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
                 openFileDialog.FilterIndex = 2;
                 openFileDialog.RestoreDirectory = true;
@@ -124,23 +124,37 @@ namespace Assessment02
 
         }
 
+        private void lstboxRego_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (lstboxRego.Items.Count == 0)
+            {
+                return;
+            }
+            else
+            {
+                regoList.Remove(tbxInputRego.Text);
+                updateListBox();
+
+            }
+        }
+
         private void btnEditRego_Click(object sender, EventArgs e)
         {
-            if (!String.IsNullOrEmpty(tbxInputRego.Text) || lstboxRego.Select == null)
+            if (!String.IsNullOrEmpty(tbxInputRego.Text) && lstboxRego.SelectedItem != null)
             {
-                if (!regoList.Contains(tbxInputRego.Text) && lstboxRego.Select == null)
+                if (!regoList.Contains(tbxInputRego.Text))
                 {
                     regoList[lstboxRego.SelectedIndex] = tbxInputRego.Text;
                     updateListBox();
-                }
-                else if (!regoList.Contains(tbxInputRego.Text) && lstboxRego.Select != null)
-                {
-                    MessageBox.Show("Cannot edit non existent rego.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                 {
                     duplicateRego();
                 }
+            }
+            else if (!string.IsNullOrEmpty(tbxInputRego.Text) && lstboxRego.SelectedItem == null)
+            {
+                MessageBox.Show("Cannot edit non existent rego.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
@@ -149,12 +163,12 @@ namespace Assessment02
         }
 
         private void btnResetRego_Click(object sender, EventArgs e)
-        {
-            regoList.Clear();
-            tbxInputRego.Clear();
-            updateListBox();
+            {
+                regoList.Clear();
+                tbxInputRego.Clear();
+                updateListBox();
 
-        }
+            }
 
         private void btnBinarySearch_Click(object sender, EventArgs e)
         {
@@ -209,6 +223,16 @@ namespace Assessment02
                 MessageBox.Show("Texbox is empty.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 blankRego();
             }
+        }
+
+        private void btnSaveRego_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "txt files(*.txt)| *.txt | All files(*.*) | *.* ";
+            saveFileDialog.Title = "Save a list";
+            saveFileDialog.ShowDialog();
+
+
         }
     }
 }

@@ -69,6 +69,7 @@
             this.lstboxRego.Size = new System.Drawing.Size(187, 364);
             this.lstboxRego.TabIndex = 1;
             this.lstboxRego.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lstboxRego_MouseClick);
+            this.lstboxRego.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lstboxRego_MouseDoubleClick);
             // 
             // btnEnterRego
             // 
@@ -88,6 +89,7 @@
             this.btnSaveRego.TabIndex = 3;
             this.btnSaveRego.Text = "Save";
             this.btnSaveRego.UseVisualStyleBackColor = true;
+            this.btnSaveRego.Click += new System.EventHandler(this.btnSaveRego_Click);
             // 
             // btnOpenRego
             // 
